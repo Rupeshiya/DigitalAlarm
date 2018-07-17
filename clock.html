@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <title>Digital Clock</title>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+      .background{
+        background-color:#80d4ea;
+      }
+      .timer{
+        font-size: 100px;
+        width: 100%;
+        height: 600px;
+        top =0;
+        left = 0;
+        right = 0;
+        bottom = 0;
+        text-align: center;
+      }
+      #footer{
+        font-size: 20px;
+        color: blue;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="background">
+    <div class="timer">
+        <div id="time"></div>
+          <div class="hello">
+            <input type="number" id="myHour" min="0" max="12" value="Hours" placeholder="Hour">
+            <input type="number" id="myMinute" min="0" max="60" value="Minutes" placeholder="Minute">
+            <input type="number" id="mySecond" min="0" max="60" value="Seconds" placeholder="Second">
+            <select id="ampm">
+              <option>AM</option>
+              <option>PM</option>
+            </select>
+          <button id = "function">Set</button>
+          <audio>
+            <audio id="Caudio">
+              <source id="play" src="https://www.freespecialeffects.co.uk/soundfx/animals/duck1.wav" type="audio/mpeg"></source>
+              <source id="play" src="https://www.freespecialeffects.co.uk/soundfx/animals/duck1.wav" type="audio/ogg"></source>
+              <source id="play" src="https://www.freespecialeffects.co.uk/soundfx/animals/duck1.wav" type="audio/wav"></source>
+          </audio>
+          <div id="demo"></div>
+
+      </div>
+    </div>
+    <script>
+////////////////////////////////////////////////////////////////////////////
+    $('document').ready(function(){
+
+      function displayTime(){
+      var out = document.getElementById('time');
+      var date = new Date();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+      if(second<10)
+      {
+        second = "0"+ second;
+      }
+      if(minute<10)
+      {
+        minute = "0"+minute;
+      }
+      if(hour<10)
+      {
+        hour = "0"+ hour;
+      }
+      var meridian = "AM";
+      if(hour>12)
+      {
+        hour = hour-12;
+        meridian = "PM";
+      }
+      if(hour == 0)
+      {
+        hour = 12;
+        meridian = "AM";
+      }
+      out.innerText = hour +":"+minute + ":" +second +" "+ meridian;
+//////////////////////////////////////////////////////////////////////////////
+      console.log('hour'+hour);
+      console.log('second'+second);
+      console.log('minute'+minute);
+      // console.log(document.clock.hours.value);
+
+      var x;
+      var y;
+      var z;
+      var ampm;
+///////////////////////////////////////////////////////////////////////////
+
+    function myFunction() {
+     x = document.getElementById("myHour").value;
+     y = document.getElementById("myMinute").value;
+     z = document.getElementById("mySecond").value;
+    ampm = document.getElementById("ampm").value;
+    // // document.getElementById("demo").innerHTML = x;
+    /////////////////////////////////////////////////////////////////////
+    if(x < 10)
+    {
+      x = "0" + x;
+    }
+    if(y < 10)
+    {
+      y = "0" + y;
+    }
+    if(z < 10)
+    {
+      z = "0" + z;
+    }
+
+
+    // var selectedAP = ap.options[ap.selectedIndex].value;
+
+     console.log('getHours'+x);
+      console.log('getMinutes'+y);
+      console.log('getSeconds'+z);
+      console.log('ampm'+ampm);
+
+   }
+   ////////////////////////////////////////////////////////////////////
+   console.log(parseInt(hour) ==x);
+   console.log(parseInt(second) == z);
+   console.log(parseInt(minute) ==y);
+//////////////////////////////////////////////////////////////////////
+   function play(){
+     var audio = document.getElementById("play");
+     audio.play();
+   }
+  //////////////////////////////////////////////////////////////////////////
+
+    if(hour == x && minute == y && second ==z &&meridian == ampm)
+    {
+      play();
+    }
+    $("#function").click(myFunction());
+    }
+    var set = displayTime();
+    displayTime();
+    setInterval(displayTime,1000);
+  });
+//////////////////////////////////////////////////////////////////////////////
+    </script>
+
+  </body>
+</html>
